@@ -1,0 +1,34 @@
+//Find majority element i.e. the element which occurs more than n/2 times in a given array.
+
+----------------------------------------------------------------------------------------------------------------
+
+
+class Solution {
+public:
+    int majorityElement(vector<int>& nums) {
+        
+        int count = 1,in = 0,c = 0;
+        int n = nums.size();
+        
+        for(int i=1;i<n;i++){
+            if(nums[i] == nums[in])
+                count++;
+            else
+                count--;
+           // cout<<count<<" ";
+            if(count == 0){ //cout<<"jj";
+                count = 1 ;
+                in = i;
+            }          
+        }
+        
+        for(int i=0;i<n;i++){
+            if(nums[i] == nums[in])
+                 c++;   
+        }
+        
+        if(2*c>n)
+          return nums[in];
+        return 0;
+    }
+};
