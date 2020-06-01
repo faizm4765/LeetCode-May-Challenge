@@ -1,0 +1,70 @@
+In a town, there are N people labelled from 1 to N.  There is a rumor that one of these people is secretly the town judge.
+
+If the town judge exists, then:
+
+The town judge trusts nobody.
+Everybody (except for the town judge) trusts the town judge.
+There is exactly one person that satisfies properties 1 and 2.
+You are given trust, an array of pairs trust[i] = [a, b] representing that the person labelled a trusts the person labelled b.
+
+If the town judge exists and can be identified, return the label of the town judge.  Otherwise, return -1.
+
+Ex : N = 3, trust = [[1,3],[2,3],[3,1]]
+Output: -1
+
+------------------------------------------------------------------------------------------------------------
+class Solution {
+public:
+    int findJudge(int N, vector<vector<int>>& trust) {
+        
+        
+        int hash[1000] = {0};
+        map<int,vector<int>> v;
+        int n = trust.size();
+        if(n == 0)
+            return 1;
+        for(int i=0;i<n;i++){
+            hash[trust[i][0]-1] = 1;
+            v[trust[i][0]].push_back(trust[i][1]);
+           // cout<<trust[i][0]-1<<" "<<trust[i][1]-1<<" ";
+        }
+        int i = 0,val = 0,flag = 0;
+        for(;i<N;i++){
+          //  cout<<hash[i]<<" ";
+            if(hash[i] == 0 and flag == 1)
+                return -1;
+            if(hash[i] == 0){
+                val = i;
+                flag = 1;
+            }
+        }
+        i = val+1;
+        
+        
+        // cout<<i;
+        // int size = v.size(),count = 0;
+        //cout<<size<<" ";
+        // for(auto j=v.begin();j != v.end();j++){ cout<<(j->first)<<" ";
+        //     for(auto k=j->second.begin();k != j->second.end();k++){
+        //         cout<<(*k)<<" ";    cout<<(k-j->second.begin())<<" ";
+        //     }
+        //     cout<<endl;
+        // }
+        
+        
+        
+        
+        
+        
+        for(auto j=v.begin();j != v.end();j++){
+         //  int s = v[j].size();
+            
+            auto it = find(j->second.begin(),j->second.end(),i);  
+            cout<<(it-(j->second.begin()))<<" "; // cout<<count<<"\n";
+            
+            if(it == j->second.end())
+                return -1;
+        }
+        return i;
+    }
+};
