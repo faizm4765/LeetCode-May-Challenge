@@ -1,0 +1,23 @@
+Given a string, find the first non-repeating character in it and return it's index. If it doesn't exist, return -1.
+
+-------------------------------------------------------------------------------
+// tried Java for fun !!
+
+class Solution {
+    public int firstUniqChar(String s) {
+        
+        int hash[] = new int[26];
+        int i,n = s.length();
+        
+      //  char S[] = s.toCharArray();
+        
+        for(i=0;i<n;i++){
+            hash[s.charAt(i)-97] += 1;
+        }
+        for(i=0;i<n;i++){
+            if(hash[s.charAt(i)-97] == 1)
+                return i;
+        }
+        return -1;
+    }
+}
