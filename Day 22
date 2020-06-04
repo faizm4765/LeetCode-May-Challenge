@@ -1,0 +1,32 @@
+class Solution {
+public:
+    
+   static bool cmp(pair<char,int> a,pair<char,int> b){
+         if(a.second == b.second)
+             return a.first < b.first;
+        return a.second >= b.second;
+        
+    }
+    
+    string frequencySort(string s) {
+        
+        ios_base::sync_with_stdio(false);
+        cin.tie(NULL);
+        cout.tie(0);
+        
+        if(s.empty())
+            return "";
+        
+        string res;
+
+        vector<pair<int,char>> v(123,{0,0});
+        for(auto c:s){
+            v[c] = {v[c].first+1,c};
+        }
+        sort(v.begin(),v.end());
+        for(auto c: v){
+            res = string(c.first,c.second) + res;
+        }
+        return res;
+    }
+};
