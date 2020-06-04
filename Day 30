@@ -1,0 +1,29 @@
+class Solution {
+public:
+    static bool cmp(pair<vector<int>,int> a,pair<vector<int>,int> b){
+        return a.second <= b.second;
+    }    
+
+    vector<vector<int>> kClosest(vector<vector<int>>& points, int k) {
+        
+        ios_base::sync_with_stdio(false);
+        cin.tie(NULL);
+        
+        
+        vector<pair<vector<int>, int> > res;
+        vector<vector<int>> ans;
+        int n = points.size();
+        if(n == 0)
+            return ans;
+        for(int i=0;i<n;i++){
+            int dis = points[i][0]*points[i][0] + points[i][1]*points[i][1];
+            res.push_back({points[i],(dis)});
+        }
+        
+        sort(res.begin(),res.end(),cmp);
+        for(int i=0;i<k;i++){
+            ans.push_back(res[i].first);
+        }
+        return ans;
+    }
+};
